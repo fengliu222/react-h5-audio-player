@@ -4,7 +4,7 @@ import { getDisplayTimeBySeconds } from './utils'
 
 interface DurationProps {
   audio?: HTMLAudioElement
-  defaultDuration: ReactNode
+  defaultDuration: number
   timeFormat: TIME_FORMAT
 }
 
@@ -21,21 +21,19 @@ class Duration extends PureComponent<DurationProps, DurationState> {
     super(props)
     const { audio, timeFormat, defaultDuration } = props
     this.state = {
-      duration: audio ? getDisplayTimeBySeconds(audio.duration, audio.duration, timeFormat) : defaultDuration,
+      duration: defaultDuration,
     }
   }
 
   state: DurationState = {
-    duration: this.props.audio
-      ? getDisplayTimeBySeconds(this.props.audio.duration, this.props.audio.duration, this.props.timeFormat)
-      : this.props.defaultDuration,
+    duration: this.props.defaultDuration,
   }
 
   handleAudioDurationChange = (e: Event): void => {
     const audio = e.target as HTMLAudioElement
     const { timeFormat, defaultDuration } = this.props
     this.setState({
-      duration: getDisplayTimeBySeconds(audio.duration, audio.duration, timeFormat) || defaultDuration,
+      duration: defaultDuration,
     })
   }
 
