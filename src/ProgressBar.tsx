@@ -89,7 +89,7 @@ class ProgressBar extends Component<ProgressBarProps, ProgressBarState> {
     event.stopPropagation()
     const { currentTime, currentTimePos } = this.getCurrentProgress(event.nativeEvent)
 
-    if (isFinite(currentTime)) {
+    if (isFinite(currentTime) && currentTime < 30) {
       this.timeOnMouseMove = currentTime
       this.setState({ isDraggingProgress: true, currentTimePos })
       if (event.nativeEvent instanceof MouseEvent) {
