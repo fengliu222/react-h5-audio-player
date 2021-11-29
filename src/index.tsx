@@ -215,6 +215,9 @@ class H5AudioPlayer extends Component<PlayerProps> {
     e.stopPropagation()
     const audio = this.audio.current
     if ((audio.paused || audio.ended) && audio.src) {
+      if(e.target.currentTime >= 30) {
+        return
+      }
       this.playAudioPromise()
     } else if (!audio.paused) {
       audio.pause()
