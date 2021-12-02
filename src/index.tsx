@@ -58,6 +58,7 @@ interface PlayerProps {
     backward?: number
     forward?: number
   }
+  duration: number
   volumeJumpStep?: number
   loop?: boolean
   muted?: boolean
@@ -165,6 +166,7 @@ class H5AudioPlayer extends Component<PlayerProps> {
     progressUpdateInterval: 20,
     defaultCurrentTime: '--:--',
     defaultDuration: '--:--',
+    duration: 0,
     timeFormat: 'auto',
     volume: 1,
     className: '',
@@ -391,6 +393,7 @@ class H5AudioPlayer extends Component<PlayerProps> {
       volume: volumeProp,
       loop: loopProp,
       mse,
+      duration: durationProp,
       i18nAriaLabels,
     } = this.props
 
@@ -430,6 +433,7 @@ class H5AudioPlayer extends Component<PlayerProps> {
             onChangeCurrentTimeError={onChangeCurrentTimeError}
             srcDuration={mse && mse.srcDuration}
             i18nProgressBar={i18nAriaLabels.progressControl}
+            duration={durationProp}
           />
         )
       case RHAP_UI.DURATION:
