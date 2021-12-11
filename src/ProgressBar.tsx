@@ -137,7 +137,7 @@ class ProgressBar extends Component<ProgressBarProps, ProgressBarState> {
     let newTime = this.timeOnMouseMove;
     const { audio, onChangeCurrentTimeError, onSeek } = this.props;
     if (newTime > 30) {
-      newTime = 29;
+      newTime = 30;
     }
     if (onSeek) {
       this.setState(
