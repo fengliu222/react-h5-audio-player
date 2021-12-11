@@ -96,14 +96,11 @@ class ProgressBar extends Component<ProgressBarProps, ProgressBarState> {
   ): void => {
     event.stopPropagation();
     const { audio, progressBar } = this.props;
-    if (audio.currentTime > 30) {
-      return;
-    }
     const { currentTime, currentTimePos } = this.getCurrentProgress(
       event.nativeEvent
     );
 
-    if (isFinite(currentTime) && currentTime < 30) {
+    if (isFinite(currentTime)) {
       this.timeOnMouseMove = currentTime;
       this.setState({ isDraggingProgress: true, currentTimePos });
       if (event.nativeEvent instanceof MouseEvent) {
@@ -139,7 +136,9 @@ class ProgressBar extends Component<ProgressBarProps, ProgressBarState> {
     event.stopPropagation();
     const newTime = this.timeOnMouseMove;
     const { audio, onChangeCurrentTimeError, onSeek } = this.props;
-
+    if (newTime > 30) {
+      return;
+    }
     if (onSeek) {
       this.setState(
         { isDraggingProgress: false, waitingForSeekCallback: true },
