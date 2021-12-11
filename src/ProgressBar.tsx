@@ -134,10 +134,10 @@ class ProgressBar extends Component<ProgressBarProps, ProgressBarState> {
 
   handleWindowMouseOrTouchUp = (event: MouseEvent | TouchEvent): void => {
     event.stopPropagation();
-    const newTime = this.timeOnMouseMove;
+    let newTime = this.timeOnMouseMove;
     const { audio, onChangeCurrentTimeError, onSeek } = this.props;
     if (newTime > 30) {
-      return;
+      newTime = 29;
     }
     if (onSeek) {
       this.setState(
